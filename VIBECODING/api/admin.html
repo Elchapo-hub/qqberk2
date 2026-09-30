@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Superfine Group | Admin Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Manrope','sans-serif'],display:['Sora','sans-serif']}}}}</script>
+</head>
+<body class="min-h-screen bg-slate-950 font-sans text-slate-100">
+  <main class="relative min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_right,_#1e3a8a_0,_transparent_32%),linear-gradient(135deg,_#020617,_#0f172a)] p-4 sm:p-8">
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 overflow-hidden">
+      <img src="uchoopics/commercial_product_photography_of_heavy_duty_auto_rickshaw_and_three_wheeler.png" alt="" class="absolute -inset-12 h-[calc(100%+6rem)] w-[calc(100%+6rem)] max-w-none object-cover opacity-25 blur-2xl scale-110">
+      <div class="absolute inset-0 bg-slate-950/65"></div>
+    </div>
+    <section class="relative z-10 mx-auto max-w-6xl">
+      <a href="mose.html" class="inline-flex items-center gap-2 text-sm font-medium text-slate-300 transition hover:text-white">← Return to website</a>
+
+      <div id="login-view" class="mx-auto mt-16 max-w-md rounded-3xl border border-slate-700/80 bg-white p-7 text-slate-800 shadow-2xl sm:p-9">
+        <div class="mb-7 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-xl font-bold text-white">S</div>
+        <p class="text-xs font-bold uppercase tracking-[.18em] text-blue-600">Protected access</p>
+        <h1 class="mt-2 font-display text-3xl font-bold text-slate-950">Admin dashboard</h1>
+        <p class="mt-2 text-sm leading-relaxed text-slate-500">Review customer enquiries, update sales progress and remove records when permitted.</p>
+        <form id="login-form" class="mt-7 space-y-4">
+          <label class="block text-sm font-semibold text-slate-700">Username<input id="username" class="mt-1.5 w-full rounded-xl border-slate-300 px-3 py-3 text-sm focus:border-blue-600 focus:ring-blue-600" value="admin" autocomplete="username" required></label>
+          <label class="block text-sm font-semibold text-slate-700">Password<input id="password" class="mt-1.5 w-full rounded-xl border-slate-300 px-3 py-3 text-sm focus:border-blue-600 focus:ring-blue-600" value="admin" type="password" autocomplete="current-password" required></label>
+          <p id="login-error" class="hidden rounded-xl bg-rose-50 p-3 text-xs font-medium text-rose-700" role="alert"></p>
+          <button class="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-3 text-sm font-bold text-white transition hover:bg-blue-700 disabled:cursor-wait disabled:opacity-70" type="submit">Sign in securely <span>→</span></button>
+        </form>
+        <p class="mt-5 text-center text-[11px] leading-relaxed text-slate-400">Authorised users only. Activity here manages customer contact data and must follow your company’s privacy and retention policy.</p>
+      </div>
+
+      <section id="dashboard-view" class="hidden">
+        <header class="mt-8 flex flex-col justify-between gap-5 rounded-3xl border border-slate-700 bg-slate-900/85 p-6 shadow-xl backdrop-blur sm:flex-row sm:items-center">
+          <div><p class="text-xs font-bold uppercase tracking-[.18em] text-blue-400">Superfine Group</p><h1 class="mt-1 font-display text-3xl font-bold text-white">Enquiry control centre</h1><p class="mt-1 text-sm text-slate-400">Logged in as <span id="admin-name" class="font-semibold text-slate-200"></span></p></div>
+          <div class="flex flex-wrap gap-3"><button id="refresh-button" class="rounded-xl border border-slate-600 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:border-blue-400 hover:bg-slate-800">Refresh inbox</button><button id="logout-button" class="rounded-xl bg-rose-500/15 px-4 py-2.5 text-sm font-semibold text-rose-200 transition hover:bg-rose-500/25">Sign out</button></div>
+        </header>
+        <div class="mt-6 grid gap-4 sm:grid-cols-3"><article class="rounded-2xl border border-slate-700 bg-slate-900 p-5"><p class="text-xs font-semibold uppercase tracking-wider text-slate-400">All enquiries</p><p id="all-count" class="mt-2 text-3xl font-bold text-white">0</p></article><article class="rounded-2xl border border-slate-700 bg-slate-900 p-5"><p class="text-xs font-semibold uppercase tracking-wider text-slate-400">New to review</p><p id="new-count" class="mt-2 text-3xl font-bold text-amber-300">0</p></article><article class="rounded-2xl border border-slate-700 bg-slate-900 p-5"><p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Quoted / closed</p><p id="complete-count" class="mt-2 text-3xl font-bold text-emerald-300">0</p></article></div>
+        <div id="notice" class="hidden mt-6 rounded-xl border px-4 py-3 text-sm" role="status"></div>
+        <section class="mt-6 overflow-hidden rounded-3xl border border-slate-700 bg-slate-900 shadow-xl"><div class="flex flex-col justify-between gap-2 border-b border-slate-700 p-6 sm:flex-row sm:items-end"><div><p class="text-xs font-bold uppercase tracking-[.18em] text-blue-400">Customer requests</p><h2 class="mt-1 font-display text-xl font-bold text-white">Direct website enquiries</h2></div><p class="text-xs text-slate-400">Set the stage before communicating, or permanently remove records you are authorised to delete.</p></div><div id="empty-state" class="p-12 text-center text-sm text-slate-400">No enquiries have been received yet.</div><div id="table-wrap" class="hidden overflow-x-auto"><table class="w-full min-w-[900px] text-left text-sm"><thead class="bg-slate-800/70 text-xs uppercase tracking-wider text-slate-400"><tr><th class="px-5 py-4">Customer</th><th class="px-5 py-4">Selected items &amp; requirement</th><th class="px-5 py-4">Received</th><th class="px-5 py-4">Status</th><th class="px-5 py-4">Control</th></tr></thead><tbody id="enquiry-body" class="divide-y divide-slate-800"></tbody></table></div></section>
+      </section>
+    </section>
+  </main>
+  <script>
+    const api = 'admin.php';
+    const loginView = document.getElementById('login-view');
+    const dashboardView = document.getElementById('dashboard-view');
+    const notice = document.getElementById('notice');
+    let enquiries = [];
+
+    async function request(action, body = {}) {
+      const response = await fetch(`${api}${action === 'inquiries' ? '?action=inquiries' : ''}`, { method: action === 'inquiries' ? 'GET' : 'POST', credentials: 'same-origin', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: action === 'inquiries' ? undefined : JSON.stringify({ action, ...body }) });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.ok) throw new Error(data.message || 'The admin service is unavailable.');
+      return data;
+    }
+    function showNotice(message, error = false) { notice.textContent = message; notice.className = `mt-6 rounded-xl border px-4 py-3 text-sm ${error ? 'border-rose-500/40 bg-rose-500/10 text-rose-200' : 'border-emerald-500/40 bg-emerald-500/10 text-emerald-100'}`; }
+    function escapeHtml(value = '') { const div = document.createElement('div'); div.textContent = value; return div.innerHTML; }
+    function render() {
+      document.getElementById('all-count').textContent = enquiries.length;
+      document.getElementById('new-count').textContent = enquiries.filter(item => item.status === 'New' || item.status === 'In review').length;
+      document.getElementById('complete-count').textContent = enquiries.filter(item => item.status === 'Quoted' || item.status === 'Closed').length;
+      document.getElementById('empty-state').classList.toggle('hidden', enquiries.length > 0);
+      document.getElementById('table-wrap').classList.toggle('hidden', enquiries.length === 0);
+      document.getElementById('enquiry-body').innerHTML = enquiries.map(item => `<tr class="align-top text-slate-300"><td class="px-5 py-4"><strong class="block text-white">${escapeHtml(item.name)}</strong><a class="mt-1 block text-xs text-blue-300 hover:text-blue-200" href="mailto:${encodeURIComponent(item.email)}">${escapeHtml(item.email)}</a><span class="mt-1 block text-xs text-slate-400">${escapeHtml(item.phone)}</span></td><td class="max-w-sm px-5 py-4"><strong class="text-xs text-blue-200">${escapeHtml(item.category)}</strong><p class="mt-1 whitespace-pre-line text-xs leading-relaxed text-slate-400">${escapeHtml(item.requirement)}</p></td><td class="px-5 py-4 text-xs text-slate-400">${item.createdAt ? new Date(item.createdAt).toLocaleString() : '—'}</td><td class="px-5 py-4"><select data-status="${item.id}" class="rounded-lg border-slate-600 bg-slate-800 py-2 text-xs text-white focus:border-blue-500 focus:ring-blue-500"><option ${item.status === 'New' ? 'selected' : ''}>New</option><option ${item.status === 'In review' ? 'selected' : ''}>In review</option><option ${item.status === 'Quoted' ? 'selected' : ''}>Quoted</option><option ${item.status === 'Closed' ? 'selected' : ''}>Closed</option></select></td><td class="px-5 py-4"><button data-delete="${item.id}" class="rounded-lg border border-rose-500/40 px-3 py-2 text-xs font-semibold text-rose-200 transition hover:bg-rose-500/15">Delete</button></td></tr>`).join('');
+      document.querySelectorAll('[data-status]').forEach(select => select.addEventListener('change', () => updateStatus(select.dataset.status, select.value)));
+      document.querySelectorAll('[data-delete]').forEach(button => button.addEventListener('click', () => deleteEntry(button.dataset.delete)));
+    }
+    async function refresh() { try { const data = await request('inquiries'); enquiries = data.enquiries || []; render(); } catch (error) { showNotice(error.message, true); } }
+    async function updateStatus(id, status) { try { await request('update', { id, status }); await refresh(); showNotice(`Enquiry updated to ${status}.`); } catch (error) { showNotice(error.message, true); } }
+    async function deleteEntry(id) { if (!confirm('Permanently delete this enquiry? This action cannot be undone.')) return; try { await request('delete', { id }); await refresh(); showNotice('Enquiry deleted.'); } catch (error) { showNotice(error.message, true); } }
+    document.getElementById('login-form').addEventListener('submit', async event => { event.preventDefault(); const error = document.getElementById('login-error'); error.classList.add('hidden'); try { const data = await request('login', { username: document.getElementById('username').value, password: document.getElementById('password').value }); document.getElementById('admin-name').textContent = data.username; loginView.classList.add('hidden'); dashboardView.classList.remove('hidden'); await refresh(); } catch (requestError) { error.textContent = requestError.message; error.classList.remove('hidden'); } });
+    document.getElementById('refresh-button').addEventListener('click', refresh);
+    document.getElementById('logout-button').addEventListener('click', async () => { try { await request('logout'); } finally { dashboardView.classList.add('hidden'); loginView.classList.remove('hidden'); enquiries = []; } });
+    request('session').then(data => { document.getElementById('admin-name').textContent = data.username; loginView.classList.add('hidden'); dashboardView.classList.remove('hidden'); refresh(); }).catch(() => {});
+  </script>
+</body>
+</html>
